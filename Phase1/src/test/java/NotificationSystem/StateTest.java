@@ -18,9 +18,7 @@ public class StateTest {
     public void testToggleToUnidirectional() {
         Node cityA = new Node();
         Node cityB = new Node();
-
         Edge.createEdge(cityA, cityB, false, 1);
-
         Graph graph = new Graph(new ArrayList<>(List.of(cityA, cityB)));
         NotificationSystem context = new NotificationSystem(graph, new UnidirectionalState());
         context.toggleDirection(graph);

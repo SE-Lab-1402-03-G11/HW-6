@@ -7,21 +7,20 @@ import lombok.Getter;
 import lombok.Setter;
 import state.UnidirectionalState;
 
-@Getter
 @Setter
+@Getter
 public class NotificationSystem {
     private Graph graph;
-    private int trainSpeed = 1;
     private State state;
+    private int trainSpeed = 1;
 
-    public NotificationSystem(Graph graph, State unidirectionalState) {
+    public NotificationSystem(Graph graph, State state) {
         this.graph = graph;
-        this.state = unidirectionalState;
+        this.setState(state);
     }
 
     public void toggleDirection(Graph graph) {
-    }
-
-    public void setState(State unidirectionalState) {
+        state.toggleDirection(graph);
+        state = state.nextState();
     }
 }

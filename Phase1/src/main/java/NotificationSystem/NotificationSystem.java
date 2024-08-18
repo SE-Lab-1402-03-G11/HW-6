@@ -31,6 +31,6 @@ public class NotificationSystem {
     }
 
     public boolean existPath(Node source, Node destination, Node hatedCity) {
-        return true;
+        return strategy.existPath(source, destination, hatedCity, graph);
     }
 }

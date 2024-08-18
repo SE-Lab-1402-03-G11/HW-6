@@ -28,8 +28,11 @@ public class Graph {
         }
     }
 
-    public void bfs(Node s) {
+    public void bfs(Node s, Node hatedCity) {
         this.resetVisits();
+        if(hatedCity != null){
+            hatedCity.setVisited(true);
+        }
         this.resetDistances();
         s.setDistance(0);
 
@@ -50,8 +53,11 @@ public class Graph {
         }
     }
 
-    public void dijkstra(Node s) {
+    public void dijkstra(Node s, Node hatedCity) {
         this.resetVisits();
+        if(hatedCity != null){
+            hatedCity.setVisited(true);
+        }
         this.resetDistances();
         s.setDistance(0);
 

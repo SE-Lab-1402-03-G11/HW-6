@@ -22,8 +22,16 @@ public class Graph {
             v.setVisited(false);
     }
 
+    public void resetDistances(){
+        for(Node v : this.getGraph()){
+            v.setDistance(Integer.MAX_VALUE);
+        }
+    }
+
     public void bfs(Node s) {
         this.resetVisits();
+        this.resetDistances();
+        s.setDistance(0);
 
         Queue<Pair<Node, Integer>> nodes = new LinkedList<>();
         nodes.add(new Pair<Node, Integer>(s, 0));
@@ -44,6 +52,8 @@ public class Graph {
 
     public void dijkstra(Node s) {
         this.resetVisits();
+        this.resetDistances();
+        s.setDistance(0);
 
         PriorityQueue<Pair<Integer, Node>> nodes = new PriorityQueue<>();
         nodes.add(new Pair<Integer, Node>(0, s));

@@ -6,13 +6,15 @@ import state.State;
 import lombok.Getter;
 import lombok.Setter;
 import state.UnidirectionalState;
+import strategy.Strategy;
 
 @Setter
 @Getter
 public class NotificationSystem {
     private Graph graph;
     private State state;
-    private int trainSpeed = 1;
+    private Strategy strategy;
+    private Integer trainSpeed = 1;
 
     public NotificationSystem(Graph graph, State state) {
         this.graph = graph;
@@ -22,5 +24,9 @@ public class NotificationSystem {
     public void toggleDirection(Graph graph) {
         state.toggleDirection(graph);
         state = state.nextState();
+    }
+
+    public Integer calculateDistance(Node source, Node destination){
+        return strategy.calculateDistance(source, destination, graph, trainSpeed);
     }
 }

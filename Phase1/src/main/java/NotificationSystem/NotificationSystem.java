@@ -29,4 +29,8 @@ public class NotificationSystem {
     public Integer calculateDistance(Node source, Node destination){
         return strategy.calculateDistance(source, destination, graph, trainSpeed);
     }
+
+    public boolean existPath(Node source, Node destination, Node hatedCity) {
+        return true;
+    }
 }

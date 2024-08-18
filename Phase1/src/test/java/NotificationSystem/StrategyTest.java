@@ -46,4 +46,36 @@ public class StrategyTest {
         int distance = context.calculateDistance(cityA, cityB);
         assertEquals(2, distance);
     }
+
+    @Test
+    public void testHatedCity1() {
+        Node cityA = new Node();
+        Node cityB = new Node();
+        Node cityC = new Node();
+
+        Edge.createEdge(cityA, cityB, false, 4);
+        Edge.createEdge(cityB, cityC, false, 4);
+
+        Graph graph = new Graph(new ArrayList<>(List.of(cityA, cityB, cityC)));
+        NotificationSystem context = new NotificationSystem(graph, new UnidirectionalState());
+        context.setStrategy(new TrainStrategy());
+        boolean existPath = context.existPath(cityA, cityC, cityB);
+        assertFalse(existPath);
+    }
+
+    @Test
+    public void testHatedCity2() {
+        Node cityA = new Node();
+        Node cityB = new Node();
+        Node cityC = new Node();
+
+        Edge.createEdge(cityA, cityB, false, 4);
+        Edge.createEdge(cityB, cityC, false, 4);
+
+        Graph graph = new Graph(new ArrayList<>(List.of(cityA, cityB, cityC)));
+        NotificationSystem context = new NotificationSystem(graph, new UnidirectionalState());
+        context.setStrategy(new TrainStrategy());
+        boolean existPath = context.existPath(cityA, cityB, cityC);
+        assertTrue(existPath);
+    }
 }

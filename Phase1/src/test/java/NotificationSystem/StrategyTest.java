@@ -22,7 +22,7 @@ public class StrategyTest {
         Node cityA = new Node();
         Node cityB = new Node();
 
-        Edge.createEdge(cityA, cityB, false, 1);
+        Edge.createEdge(cityA, cityB, false, 4);
 
         Graph graph = new Graph(new ArrayList<>(List.of(cityA, cityB)));
         NotificationSystem context = new NotificationSystem(graph, new UnidirectionalState());

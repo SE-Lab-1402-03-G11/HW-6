@@ -7,6 +7,7 @@ public class BusStrategy implements Strategy {
 
     @Override
     public int calculateDistance(Node source, Node destination, Graph graph, int trainPrice) {
-        return 0;
+        graph.dijkstra(source);
+        return destination.getDistance();
     }
 }

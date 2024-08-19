@@ -22,8 +22,19 @@ public class Graph {
             v.setVisited(false);
     }
 
-    public void bfs(Node s) {
+    public void resetDistances(){
+        for(Node v : this.getGraph()){
+            v.setDistance(Integer.MAX_VALUE);
+        }
+    }
+
+    public void bfs(Node s, Node hatedCity) {
         this.resetVisits();
+        if(hatedCity != null){
+            hatedCity.setVisited(true);
+        }
+        this.resetDistances();
+        s.setDistance(0);
 
         Queue<Pair<Node, Integer>> nodes = new LinkedList<>();
         nodes.add(new Pair<Node, Integer>(s, 0));
@@ -42,8 +53,13 @@ public class Graph {
         }
     }
 
-    public void dijkstra(Node s) {
+    public void dijkstra(Node s, Node hatedCity) {
         this.resetVisits();
+        if(hatedCity != null){
+            hatedCity.setVisited(true);
+        }
+        this.resetDistances();
+        s.setDistance(0);
 
         PriorityQueue<Pair<Integer, Node>> nodes = new PriorityQueue<>();
         nodes.add(new Pair<Integer, Node>(0, s));

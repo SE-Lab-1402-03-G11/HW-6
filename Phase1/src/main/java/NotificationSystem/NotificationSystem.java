@@ -6,7 +6,10 @@ import state.State;
 import lombok.Getter;
 import lombok.Setter;
 import state.UnidirectionalState;
+import strategy.BusStrategy;
 import strategy.Strategy;
+import strategy.StrategyApproach;
+import strategy.TrainStrategy;
 
 @Setter
 @Getter
@@ -21,7 +24,7 @@ public class NotificationSystem {
         this.setState(state);
     }
 
-    public void toggleDirection(Graph graph) {
+    public void toggleDirection() {
         state.toggleDirection(graph);
         state = state.nextState();
     }
@@ -32,5 +35,9 @@ public class NotificationSystem {
 
     public boolean existPath(Node source, Node destination, Node hatedCity) {
         return strategy.existPath(source, destination, hatedCity, graph);
+    }
+
+    public StrategyApproach getFasterTransport(Node source, Node destination) {
+        return StrategyApproach.BUS;
     }
 }

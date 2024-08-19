@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import state.BidirectionalState;
 import state.UnidirectionalState;
 import strategy.BusStrategy;
+import strategy.StrategyApproach;
 import strategy.TrainStrategy;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class StrategyTest {
         Node cityA = new Node();
         Node cityB = new Node();
 
-        Edge.createEdge(cityA, cityB, false, 2);  // A <-> B
+        Edge.createEdge(cityA, cityB, false, 2);
 
         Graph graph = new Graph(new ArrayList<>(List.of(cityA, cityB)));
         NotificationSystem context = new NotificationSystem(graph, new BidirectionalState());
@@ -45,6 +46,37 @@ public class StrategyTest {
 
         int distance = context.calculateDistance(cityA, cityB);
         assertEquals(2, distance);
+    }
+
+    @Test
+    public void testFasterStrategy1() {
+        Node cityA = new Node();
+        Node cityB = new Node();
+
+        Edge.createEdge(cityA, cityB, false, 2);
+
+        Graph graph = new Graph(new ArrayList<>(List.of(cityA, cityB)));
+        NotificationSystem context = new NotificationSystem(graph, new BidirectionalState());
+        context.setStrategy(new BusStrategy());
+
+        StrategyApproach faster = context.getFasterTransport(cityA, cityB);
+        assertEquals(faster, StrategyApproach.TRAIN);
+    }
+
+    @Test
+    public void testFasterStrategy2() {
+        Node cityA = new Node();
+        Node cityB = new Node();
+
+        Edge.createEdge(cityA, cityB, false, 2);
+
+        Graph graph = new Graph(new ArrayList<>(List.of(cityA, cityB)));
+        NotificationSystem context = new NotificationSystem(graph, new BidirectionalState());
+        context.setTrainSpeed(3);
+        context.setStrategy(new BusStrategy());
+
+        StrategyApproach faster = context.getFasterTransport(cityA, cityB);
+        assertEquals(faster, StrategyApproach.BUS);
     }
 
     @Test

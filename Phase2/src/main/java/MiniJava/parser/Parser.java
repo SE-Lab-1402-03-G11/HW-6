@@ -9,9 +9,11 @@ import java.util.Stack;
 import MiniJava.Log.Log;
 import MiniJava.codeGenerator.CodeGeneratorFacade;
 import MiniJava.errorHandler.ErrorHandler;
+import MiniJava.parser.Action;
 import MiniJava.scanner.ScannerFacade;
 import MiniJava.scanner.token.Token;
 
+import MiniJava.parser.Accept;
 public class Parser {
     private ArrayList<Rule> rules;
     private Stack<Integer> parsStack;

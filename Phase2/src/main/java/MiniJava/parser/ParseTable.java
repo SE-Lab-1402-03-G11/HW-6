@@ -2,6 +2,11 @@ package MiniJava.parser;
 
 import MiniJava.errorHandler.ErrorHandler;
 import MiniJava.scanner.token.Token;
+import MiniJava.parser.Accept;
+import MiniJava.parser.Action;
+import MiniJava.parser.Shift;
+import MiniJava.parser.Reduce;
+import MiniJava.parser.act;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,12 +53,11 @@ public class ParseTable {
             for (int j = 1; j < cols.length; j++) {
                 if (!cols[j].equals("")) {
                     if (cols[j].equals("acc")) {
-                        actionTable.get(actionTable.size() - 1).put(terminals.get(j), new Action(act.accept, 0));
+                        actionTable.get(actionTable.size() - 1).put(terminals.get(j), new Accept(0));
                     } else if (terminals.containsKey(j)) {
 //                        try {
                         Token t = terminals.get(j);
-                        Action a = new Action(cols[j].charAt(0) == 'r' ? act.reduce : act.shift, Integer.parseInt(cols[j].substring(1)));
-                        actionTable.get(actionTable.size() - 1).put(t, a);
+                        Action a = cols[j].charAt(0) == 'r' ? new Reduce(Integer.parseInt(cols[j].substring(1))) : new Shift(Integer.parseInt(cols[j].substring(1)));
 //                        }catch (StringIndexOutOfBoundsException e){
 //                            e.printStackTrace();
 //                        }

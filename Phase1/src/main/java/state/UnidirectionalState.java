@@ -13,7 +13,7 @@ public class UnidirectionalState implements State {
     public void toggleDirection(Graph graph) {
         for (Node node : graph.getGraph()) {
             for (Edge edge : node.getEdges()) {
-                edge.setDirected(true);
+                edge.setDirected(false);
             }
         }
     }

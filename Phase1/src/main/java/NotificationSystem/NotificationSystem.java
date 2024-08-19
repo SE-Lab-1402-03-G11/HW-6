@@ -38,6 +38,11 @@ public class NotificationSystem {
     }
 
     public StrategyApproach getFasterTransport(Node source, Node destination) {
-        return StrategyApproach.BUS;
+        this.setStrategy(new TrainStrategy());
+        Integer trainDistance =  this.calculateDistance(source, destination);
+        this.setStrategy(new BusStrategy());
+        Integer busDistance = this.calculateDistance(source, destination);
+        if (trainDistance > busDistance) { return StrategyApproach.BUS;}
+        else { return StrategyApproach.TRAIN;}
     }
 }

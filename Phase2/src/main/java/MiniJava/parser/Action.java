@@ -1,6 +1,6 @@
 package MiniJava.parser;
 
-public class Action {
+public abstract class Action {
     public act action;
     //if action = shift : number is state
     //if action = reduce : number is number of rule
@@ -12,18 +12,7 @@ public class Action {
     }
 
     public String toString() {
-        switch (action) {
-            case accept:
-                return "acc";
-            case shift:
-                return "s" + number;
-            case reduce:
-                return "r" + number;
-        }
         return action.toString() + number;
     }
 }
 
-enum act {
-    shift, reduce, accept
-}

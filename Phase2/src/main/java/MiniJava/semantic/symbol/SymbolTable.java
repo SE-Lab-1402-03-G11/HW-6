@@ -17,11 +17,18 @@ public class SymbolTable {
     private SymbolType lastType;
 
     public SymbolTable(Memory memory) {
-        mem = memory;
+        setterMemory(memory);
         klasses = new HashMap<>();
         keyWords = new HashMap<>();
         keyWords.put("true", new Address(1, varType.Bool, TypeAddress.Imidiate));
         keyWords.put("false", new Address(0, varType.Bool, TypeAddress.Imidiate));
+    }
+    private Memory getterMemory(){
+        return mem;
+    }
+
+    private void setterMemory(Memory mem){
+        this.mem = mem;
     }
 
     public void setLastType(SymbolType type) {
@@ -38,6 +45,7 @@ public class SymbolTable {
     public void addField(String fieldName, String className) {
         klasses.get(className).Fields.put(fieldName, new Symbol(lastType, mem.getDateAddress()));
     }
+    klasses.get(className).Fields.put(fieldName, new Symbol(lastType, getterMemory().getDateAddress()));
 
     public void addMethod(String className, String methodName, int address) {
         if (klasses.get(className).Methodes.containsKey(methodName)) {
@@ -155,8 +163,8 @@ public class SymbolTable {
             this.codeAddress = codeAddress;
             this.returnType = returnType;
             this.orderdParameters = new ArrayList<>();
-            this.returnAddress = mem.getDateAddress();
-            this.callerAddress = mem.getDateAddress();
+            this.returnAddress = getterMemory().getDateAddress();
+            this.callerAddress = getterMemory().getDateAddress();
             this.parameters = new HashMap<>();
             this.localVariable = new HashMap<>();
         }
@@ -168,21 +176,19 @@ public class SymbolTable {
         }
 
         public void addParameter(String parameterName) {
-            parameters.put(parameterName, new Symbol(lastType, mem.getDateAddress()));
-            orderdParameters.add(parameterName);
+            parameters.put(parameterName, new Symbol(lastType, getterMemory().getDateAddress()));
         }
 
         private void reset() {
             index = 0;
         }
 
-        private Symbol getCurrentParamIndex(){
-            return parameters.get(orderdParameters.get(index));
-        }
         private Symbol getNextParameter() {
-            Symbol nextParameter = getCurrentParamIndex();
-            index++;
-            return nextParameter;
+            Symbol nextParam = parameters.get(orderdParameters.get(index));
+            increaseIndex();
+            return nextParam;
+        }
+        private void increaseIndex(){index++;
         }
     }
 
